@@ -1,4 +1,4 @@
-Updated: 04.2025  
+Updated: 12.2025  
 Script created by Salvador Camacho
 
 This script requires the FlightsAPI.exe to be running, located under:  

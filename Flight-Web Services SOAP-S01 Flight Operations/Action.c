@@ -2,7 +2,7 @@ Action()
 {
 /*
 
-Updated: 04.2025
+Updated: 12.2025
 Script created by Salvador Camacho
 
 This script requires the FlightsAPI.exe to be running, located under:
@@ -81,6 +81,13 @@ lr_end_transaction("Flight-Web Services SOAP-S01-02 Get Flights", LR_AUTO);
 	lr_think_time(10);
 	
 	
+    // Getting FlightNumber from previous response, first one
+	lr_xml_get_values(
+    	"XML={GetFlights_102_Response}",
+    	"ValueParam=FlightNumber",
+    	"Query=//FlightNumber",
+    	LAST);
+		
 	web_reg_find("Fail=NotFound",
 		"Search=Body",
 		"Text=CreateFlightOrder",
@@ -99,8 +106,8 @@ lr_start_transaction("Flight-Web Services SOAP-S01-03 Create Flight Order");
 			"<FlightOrder>"
 				"<Class>First</Class>"
 				"<CustomerName>John Doe</CustomerName>"
-				"<DepartureDate>11/09/2025</DepartureDate>"
-				"<FlightNumber>11148</FlightNumber>"
+				"<DepartureDate>{futureDate}</DepartureDate>"
+				"<FlightNumber>{FlightNumber}</FlightNumber>"
 				"<NumberOfTickets>1</NumberOfTickets>"
 			"</FlightOrder>",
 		END_ARGUMENTS,
